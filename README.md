@@ -30,6 +30,7 @@
 | `dogthings.petball` | 宠物球 | 拾取时增加心情 |
 | `dogthings.e-collar` | 伊丽莎白圈 | 佩戴后防止一次自伤 |
 | `dogthings.dogchew` | 狗咬胶 | 可食用多次，增加微量饱食和心情 |
+| `dogthings.dogcarrier` | 狗狗背包 | 一个大背包，能装入重达50u的东西 |
 
 ### 编译指南
 
@@ -41,6 +42,10 @@
   - `UnityEngine*.dll`
 
 ### 版本历史
+
+#### v1.1.0
+- 添加狗狗背包
+- 加入简体中文支持
 
 #### v1.0.0
 - 初始版本
@@ -92,6 +97,7 @@ Adds a series of dog-themed items to *Casualties: Unknown* (Demo V6.1), allowing
 | `dogthings.petball` | Pet Ball | Grants happiness on pickup |
 | `dogthings.e-collar` | Elizabethan Collar | Prevents self-harm once while worn |
 | `dogthings.dogchew` | Dog Chew | Edible multiple times, restores small amounts of hunger and happiness |
+| `dogthings.dogcarrier` | Dog Carrier | A backpack big enough to carry 50u |
 
 ### Build Guide
 
@@ -103,6 +109,10 @@ Adds a series of dog-themed items to *Casualties: Unknown* (Demo V6.1), allowing
   - `UnityEngine*.dll`
 
 ### Changelog
+
+#### v1.1.0
+- Added dog carrier
+- zh-CN support
 
 #### v1.0.0
 - Initial release
