@@ -44,6 +44,9 @@
 
 ### 版本历史
 
+#### v1.2.1
+- 修正腐烂时间丢失的问题
+
 #### v1.2.0
 - 添加捡屎袋
 - 现在支持游戏7.0版本
@@ -116,9 +119,12 @@ Adds a series of dog-themed items to *Casualties: Unknown* (Demo V7.0), allowing
 
 ### Changelog
 
+#### v1.2.1
+- rotspeed fixed
+
 #### v1.2.0
 - Added poop bag
-- Now surpported DEMO V7.0
+- Now surported DEMO V7.0
 
 #### v1.1.0
 - Added dog carrier

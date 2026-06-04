@@ -41,6 +41,10 @@ namespace DogThings
                 description = GetText("dogthings.dogcollar.dsc", "This thing around your neck makes you feel like a good boy.", "戴在脖子上就能让你感觉自己是个乖宝宝。"),
             };
             iteminfo.SetTags();
+            if (iteminfo.decayMinutes > 0f)
+            {
+                iteminfo.rotSpeed = 1.666f / iteminfo.decayMinutes;
+            }
             RshLib.Plugin.RegisterItem("dogthings.dogcollar", new RshLib.RshItem
             {
                 sprite = LoadSprite("dogcollar"),
@@ -76,6 +80,10 @@ namespace DogThings
                 description = GetText("dogthings.dogbowl.dsc", "If you get something from this bowl, you get a little bonus happy.", "从里面喝东西会让你感觉有点小开心。"),
             };
             iteminfo.SetTags();
+            if (iteminfo.decayMinutes > 0f)
+            {
+                iteminfo.rotSpeed = 1.666f / iteminfo.decayMinutes;
+            }
             RshLib.Plugin.RegisterItem("dogthings.dogbowl", new RshLib.RshItem
             {
                 sprite = LoadSprite("dogbowl"),
@@ -128,6 +136,10 @@ namespace DogThings
                 description = GetText("dogthings.e-collar.dsc", "Stops you from doing something very stupid. Once.", "阻止你做傻事……仅限一次。"),
             };
             iteminfo.SetTags();
+            if (iteminfo.decayMinutes > 0f)
+            {
+                iteminfo.rotSpeed = 1.666f / iteminfo.decayMinutes;
+            }
             RshLib.Plugin.RegisterItem("dogthings.e-collar", new RshLib.RshItem
             {
                 sprite = LoadSprite("e-collar"),
@@ -160,6 +172,10 @@ namespace DogThings
                 },
             };
             iteminfo.SetTags();
+            if (iteminfo.decayMinutes > 0f)
+            {
+                iteminfo.rotSpeed = 1.666f / iteminfo.decayMinutes;
+            }
             RshLib.Plugin.RegisterItem("dogthings.dogchew", new RshLib.RshItem
             {
                 sprite = LoadSprite("dogchew"),
@@ -190,6 +206,10 @@ namespace DogThings
                 rec = new Recognition(4),
             };
             iteminfo.SetTags();
+            if (iteminfo.decayMinutes > 0f)
+            {
+                iteminfo.rotSpeed = 1.666f / iteminfo.decayMinutes;
+            }
             RshLib.Plugin.RegisterItem("dogthings.dogcarrier", new RshLib.RshItem
             {
                 sprite = LoadSprite("dogcarrier"),
@@ -214,6 +234,10 @@ namespace DogThings
                 rec = new Recognition(3),
             };
             iteminfo.SetTags();
+            if (iteminfo.decayMinutes > 0f)
+            {
+                iteminfo.rotSpeed = 1.666f / iteminfo.decayMinutes;
+            }
             RshLib.Plugin.RegisterItem("dogthings.poopbag", new RshLib.RshItem
             {
                 sprite = LoadSprite("poopbag"),
