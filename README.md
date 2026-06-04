@@ -9,12 +9,12 @@
 
 ### 简介
 
-为游戏《Casualties: Unknown》（DEMO V6.1）添加一系列狗狗主题的道具，让你的Expie享受地球小狗的快乐（？）生活。
+为游戏《Casualties: Unknown》（DEMO V7.0）添加一系列狗狗主题的道具，让你的Expie享受地球小狗的快乐（？）生活。
 
 ### 前置依赖
 
 - **BepInEx** (5.x)
-- **RshLib** (2.1.5)
+- **RshLib** (3.0.0)
 
 ### 安装方法
 
@@ -31,6 +31,7 @@
 | `dogthings.e-collar` | 伊丽莎白圈 | 佩戴后防止一次自伤 |
 | `dogthings.dogchew` | 狗咬胶 | 可食用多次，增加微量饱食和心情 |
 | `dogthings.dogcarrier` | 狗狗背包 | 一个大背包，能装入重达50u的东西 |
+| `dogthings.poopbag` | 捡屎袋 | 一个只能用来装屎的袋子，但是能装很多 |
 
 ### 编译指南
 
@@ -42,6 +43,10 @@
   - `UnityEngine*.dll`
 
 ### 版本历史
+
+#### v1.2.0
+- 添加捡屎袋
+- 现在支持游戏7.0版本
 
 #### v1.1.0
 - 添加狗狗背包
@@ -76,12 +81,12 @@
 
 ### Introduction
 
-Adds a series of dog-themed items to *Casualties: Unknown* (Demo V6.1), allowing your Expie to enjoy the happy (?) life of an Earth dog.
+Adds a series of dog-themed items to *Casualties: Unknown* (Demo V7.0), allowing your Expie to enjoy the happy (?) life of an Earth dog.
 
 ### Requirements
 
 - **BepInEx** (5.x)
-- **RshLib** (2.1.5)
+- **RshLib** (3.0.0)
 
 ### Installation
 
@@ -98,6 +103,7 @@ Adds a series of dog-themed items to *Casualties: Unknown* (Demo V6.1), allowing
 | `dogthings.e-collar` | Elizabethan Collar | Prevents self-harm once while worn |
 | `dogthings.dogchew` | Dog Chew | Edible multiple times, restores small amounts of hunger and happiness |
 | `dogthings.dogcarrier` | Dog Carrier | A backpack big enough to carry 50u |
+| `dogthings.poopbag` | Poop Bag | A bag that can only hold poop. But a lot of it. |
 
 ### Build Guide
 
@@ -109,6 +115,10 @@ Adds a series of dog-themed items to *Casualties: Unknown* (Demo V6.1), allowing
   - `UnityEngine*.dll`
 
 ### Changelog
+
+#### v1.2.0
+- Added poop bag
+- Now surpported DEMO V7.0
 
 #### v1.1.0
 - Added dog carrier
