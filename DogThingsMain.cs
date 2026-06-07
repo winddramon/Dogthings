@@ -3,12 +3,13 @@ using HarmonyLib;
 using RshLib;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using UnityEngine;
 
 namespace DogThings
 {
-    [BepInPlugin("Yoshiko_G.DogThings", "DogThings", "1.2.0")]
+    [BepInPlugin("Yoshiko_G.DogThings", "DogThings", "1.2.2")]
     [BepInDependency("com.rushellxyz.rshlib", BepInDependency.DependencyFlags.HardDependency)]
 
     public class DogThingsMain : BaseUnityPlugin
@@ -58,10 +59,6 @@ namespace DogThings
                 slotRotation = -45f,
                 usable = true,
                 usableOnLimb = false,
-                //decayMinutes = 360f,
-                //decayInfo = 6,
-                //destroyAtZeroCondition = false,
-                //combineable = true,
                 weight = 0.5f,
                 value = 5,
                 capacity = 200f,
@@ -88,6 +85,10 @@ namespace DogThings
             {
                 sprite = LoadSprite("dogbowl"),
                 info = iteminfo,
+                onSpawn = (gObject, args) =>
+                {
+                    gObject.AddComponent<WaterContainerItem>();
+                }
             });
 
             //pet ball
@@ -214,6 +215,13 @@ namespace DogThings
             {
                 sprite = LoadSprite("dogcarrier"),
                 info = iteminfo,
+                onSpawn = (gObject, args) =>
+                {
+                    var c = gObject.AddComponent<Container>();
+                    c.maxWeight = 50f;
+                    c.maxWeightPerItem = 50f;
+                    c.encumberanceMult = 0.25f;
+                }
             });
 
             //Poop bag
@@ -242,6 +250,14 @@ namespace DogThings
             {
                 sprite = LoadSprite("poopbag"),
                 info = iteminfo,
+                onSpawn = (gObject, args) =>
+                {
+                    var c = gObject.AddComponent<Container>();
+                    c.maxWeight = 8f;
+                    c.maxWeightPerItem = 8f;
+                    c.encumberanceMult = 0.10f;
+                    c.tagRestriction = new[] { "droppings" };
+                }
             });
         }
 
@@ -345,16 +361,6 @@ namespace DogThings
             "dogthings.dogcollar", "dogthings.petball",
         };
 
-        private static HashSet<string> NeedsWaterContainerItem = new HashSet<string>
-        {
-            "dogthings.dogbowl",
-        };
-
-        private static HashSet<string> NeedsContainer = new HashSet<string>
-        {
-            "dogthings.dogcarrier",  "dogthings.poopbag",
-        };
-
         static void Postfix(Item __instance)
         {
             if (__instance != null)
@@ -364,17 +370,8 @@ namespace DogThings
                     __instance.gameObject.AddComponent<CustomItemBehaviour>();
                 }
 
-                if (NeedsWaterContainerItem.Contains(__instance.id) && __instance.GetComponent<WaterContainerItem>() == null)
-                {
-                    __instance.gameObject.AddComponent<WaterContainerItem>();
-                }
-
-                if (NeedsContainer.Contains(__instance.id) && __instance.GetComponent<Container>() == null)
-                {
-                    __instance.gameObject.AddComponent<Container>();
-                }
-
                 //以下是某些需要单独修改资源层的特殊道具
+
                 //edit pet ball's bounciness
                 if ("dogthings.petball" == __instance.id)
                 {
@@ -423,30 +420,6 @@ namespace DogThings
                 Item.GlobalItems["droppings"].tags = "droppings";
                 Item.GlobalItems["droppings"].SetTags();
                 //Debug.Log("已为屎成功添加标签。");
-            }
-        }
-    }
-
-    [HarmonyPatch(typeof(Container), "Awake")]
-    class Container_Awake_Patch()
-    {
-        static void Postfix(Container __instance)
-        {
-            var fieldInfo = AccessTools.Field(typeof(Container), "mItem");
-            Item mi = (Item)fieldInfo.GetValue(__instance);
-
-            if("dogthings.dogcarrier" == mi.id)
-            {
-                __instance.maxWeight = 50f;
-                __instance.maxWeightPerItem = 50f;
-                __instance.encumberanceMult = 0.25f;
-            }
-            else if ("dogthings.poopbag" == mi.id)
-            {
-                __instance.maxWeight = 8f;
-                __instance.maxWeightPerItem = 8f;
-                __instance.encumberanceMult = 0.10f;
-                __instance.tagRestriction = new[] { "droppings" };
             }
         }
     }

@@ -44,8 +44,11 @@
 
 ### 版本历史
 
+#### v1.2.2
+- 修正了容器内容在读取游戏时丢失的问题
+
 #### v1.2.1
-- 修正腐烂时间丢失的问题
+- 修正了腐烂时间丢失的问题
 
 #### v1.2.0
 - 添加捡屎袋
@@ -119,8 +122,11 @@ Adds a series of dog-themed items to *Casualties: Unknown* (Demo V7.0), allowing
 
 ### Changelog
 
+#### v1.2.2
+- Fixed an issue where container contents would be lost when loading a saved game
+
 #### v1.2.1
-- rotspeed fixed
+- Fixed an issue where decay timer would be lost
 
 #### v1.2.0
 - Added poop bag
