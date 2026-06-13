@@ -1,6 +1,7 @@
 ﻿using BepInEx;
 using HarmonyLib;
 using RshLib;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +10,7 @@ using UnityEngine;
 
 namespace DogThings
 {
-    [BepInPlugin("Yoshiko_G.DogThings", "DogThings", "1.2.2")]
+    [BepInPlugin("Yoshiko_G.DogThings", "DogThings", "1.3.1")]
     [BepInDependency("com.rushellxyz.rshlib", BepInDependency.DependencyFlags.HardDependency)]
 
     public class DogThingsMain : BaseUnityPlugin
@@ -19,8 +20,10 @@ namespace DogThings
             Harmony harmony = new Harmony("Yoshiko_G.DogThings");
             harmony.PatchAll();
 
+            //File.AppendAllText(Application.persistentDataPath + "/LOG.txt", "Dogthings awaking. \n");
+
             //dog collar
-            ItemInfo iteminfo = new ItemInfo
+            IteminfoRegister("dogcollar", new ItemInfo
             {
                 category = "utility",
                 slotRotation = 0f,
@@ -40,20 +43,10 @@ namespace DogThings
                 value = 20,
                 fullName = GetText("dogthings.dogcollar", "Dog Collar", "狗项圈"),
                 description = GetText("dogthings.dogcollar.dsc", "This thing around your neck makes you feel like a good boy.", "戴在脖子上就能让你感觉自己是个乖宝宝。"),
-            };
-            iteminfo.SetTags();
-            if (iteminfo.decayMinutes > 0f)
-            {
-                iteminfo.rotSpeed = 1.666f / iteminfo.decayMinutes;
-            }
-            RshLib.Plugin.RegisterItem("dogthings.dogcollar", new RshLib.RshItem
-            {
-                sprite = LoadSprite("dogcollar"),
-                info = iteminfo,
             });
 
             //dog bowl
-            iteminfo = new LiquidItemInfo
+            IteminfoRegister("dogbowl", new LiquidItemInfo
             {
                 category = "custom",
                 slotRotation = -45f,
@@ -71,28 +64,18 @@ namespace DogThings
                     foreach (var lq in wc.stack) ttlBefore += lq.amount;
                     wc.Drink(body, 100f, "drink");
                     foreach (var lq in wc.stack) ttlAfter += lq.amount;
-                    if(ttlAfter < ttlBefore) body.happiness += 3f;
+                    if (ttlAfter < ttlBefore) body.happiness += 3f;
                 },
                 fullName = GetText("dogthings.dogbowl", "Dog bowl", "狗食盆"),
                 description = GetText("dogthings.dogbowl.dsc", "If you get something from this bowl, you get a little bonus happy.", "从里面喝东西会让你感觉有点小开心。"),
-            };
-            iteminfo.SetTags();
-            if (iteminfo.decayMinutes > 0f)
+            },
+            (gObject, args) =>
             {
-                iteminfo.rotSpeed = 1.666f / iteminfo.decayMinutes;
-            }
-            RshLib.Plugin.RegisterItem("dogthings.dogbowl", new RshLib.RshItem
-            {
-                sprite = LoadSprite("dogbowl"),
-                info = iteminfo,
-                onSpawn = (gObject, args) =>
-                {
-                    gObject.AddComponent<WaterContainerItem>();
-                }
+                gObject.AddComponent<WaterContainerItem>();
             });
 
             //pet ball
-            iteminfo = new ItemInfo
+            IteminfoRegister("petball", new ItemInfo
             {
                 category = "utility",
                 slotRotation = -45f,
@@ -106,16 +89,10 @@ namespace DogThings
                 value = 12,
                 fullName = GetText("dogthings.petball", "Pet ball", "宠物球"),
                 description = GetText("dogthings.petball.dsc", "Bring it back like a champion.", "把它捡回来似乎是一件非常值得骄傲的事情。"),
-            };
-            iteminfo.SetTags();
-            RshLib.Plugin.RegisterItem("dogthings.petball", new RshLib.RshItem
-            {
-                sprite = LoadSprite("petball"),
-                info = iteminfo,
             });
 
             //Elizabethan collar
-            iteminfo = new ItemInfo
+            IteminfoRegister("e-collar", new ItemInfo
             {
                 category = "utility",
                 slotRotation = 0f,
@@ -135,20 +112,10 @@ namespace DogThings
                 value = 5,
                 fullName = GetText("dogthings.e-collar", "Elizabethan collar", "伊丽莎白圈"),
                 description = GetText("dogthings.e-collar.dsc", "Stops you from doing something very stupid. Once.", "阻止你做傻事……仅限一次。"),
-            };
-            iteminfo.SetTags();
-            if (iteminfo.decayMinutes > 0f)
-            {
-                iteminfo.rotSpeed = 1.666f / iteminfo.decayMinutes;
-            }
-            RshLib.Plugin.RegisterItem("dogthings.e-collar", new RshLib.RshItem
-            {
-                sprite = LoadSprite("e-collar"),
-                info = iteminfo,
             });
 
             //dog chew
-            iteminfo = new ItemInfo
+            IteminfoRegister("dogchew", new ItemInfo
             {
                 category = "food",
                 slotRotation = 0f,
@@ -171,20 +138,10 @@ namespace DogThings
                     item.condition -= 0.05f;
                     Sound.Play("eatCrunch", body.transform.position, false, true, null, 1f, 1f, false, false);
                 },
-            };
-            iteminfo.SetTags();
-            if (iteminfo.decayMinutes > 0f)
-            {
-                iteminfo.rotSpeed = 1.666f / iteminfo.decayMinutes;
-            }
-            RshLib.Plugin.RegisterItem("dogthings.dogchew", new RshLib.RshItem
-            {
-                sprite = LoadSprite("dogchew"),
-                info = iteminfo,
             });
 
             //Dog carrier
-            iteminfo = new ItemInfo
+            IteminfoRegister("dogcarrier", new ItemInfo
             {
                 category = "container",
                 slotRotation = 0f,
@@ -205,27 +162,17 @@ namespace DogThings
                 fullName = GetText("dogthings.dogcarrier", "Dog carrier", "狗狗背包"),
                 description = GetText("dogthings.dogcarrier.dsc", "It's big enough to carry you.", "巨大的背包，大到能把你都装进去。"),
                 rec = new Recognition(4),
-            };
-            iteminfo.SetTags();
-            if (iteminfo.decayMinutes > 0f)
+            },
+            (gObject, args) =>
             {
-                iteminfo.rotSpeed = 1.666f / iteminfo.decayMinutes;
-            }
-            RshLib.Plugin.RegisterItem("dogthings.dogcarrier", new RshLib.RshItem
-            {
-                sprite = LoadSprite("dogcarrier"),
-                info = iteminfo,
-                onSpawn = (gObject, args) =>
-                {
-                    var c = gObject.AddComponent<Container>();
-                    c.maxWeight = 50f;
-                    c.maxWeightPerItem = 50f;
-                    c.encumberanceMult = 0.25f;
-                }
+                var c = gObject.AddComponent<Container>();
+                c.maxWeight = 50f;
+                c.maxWeightPerItem = 50f;
+                c.encumberanceMult = 0.25f;
             });
 
             //Poop bag
-            iteminfo = new ItemInfo
+            IteminfoRegister("poopbag", new ItemInfo
             {
                 category = "container",
                 slotRotation = 0f,
@@ -240,24 +187,31 @@ namespace DogThings
                 fullName = GetText("dogthings.poopbag", "Poop bag", "捡屎袋"),
                 description = GetText("dogthings.poopbag.dsc", "One bag. Many messes.", "一个袋子可以装下许多麻烦。"),
                 rec = new Recognition(3),
-            };
+            },
+            (gObject, args) =>
+            {
+                var c = gObject.AddComponent<Container>();
+                c.maxWeight = 8f;
+                c.maxWeightPerItem = 8f;
+                c.encumberanceMult = 0.10f;
+                c.tagRestriction = new[] { "droppings" };
+            });
+
+            //File.AppendAllText(Application.persistentDataPath + "/LOG.txt", "Dogthings awake ended. \n");
+        }
+
+        private static void IteminfoRegister(string itemname, ItemInfo iteminfo, Action<GameObject, string> onspawn = null)
+        {
             iteminfo.SetTags();
             if (iteminfo.decayMinutes > 0f)
             {
                 iteminfo.rotSpeed = 1.666f / iteminfo.decayMinutes;
             }
-            RshLib.Plugin.RegisterItem("dogthings.poopbag", new RshLib.RshItem
+            RshLib.Plugin.RegisterItem("dogthings." + itemname, new RshLib.RshItem
             {
-                sprite = LoadSprite("poopbag"),
+                sprite = LoadSprite(itemname),
                 info = iteminfo,
-                onSpawn = (gObject, args) =>
-                {
-                    var c = gObject.AddComponent<Container>();
-                    c.maxWeight = 8f;
-                    c.maxWeightPerItem = 8f;
-                    c.encumberanceMult = 0.10f;
-                    c.tagRestriction = new[] { "droppings" };
-                }
+                onSpawn = onspawn,
             });
         }
 
@@ -295,7 +249,7 @@ namespace DogThings
     [HarmonyPatch(typeof(CustomItemBehaviour), "Update")]
     class CustomItemBehaviour_Update_Patch
     {
-        private static void Postfix(CustomItemBehaviour __instance)
+        static void Postfix(CustomItemBehaviour __instance)
         {
             if (__instance != null)
             {
@@ -380,7 +334,7 @@ namespace DogThings
                     {
                         // 复制或创建材质
                         var material = rb.sharedMaterial != null
-                            ? Object.Instantiate(rb.sharedMaterial)
+                            ? UnityEngine.Object.Instantiate(rb.sharedMaterial)
                             : new PhysicsMaterial2D();
 
                         material.bounciness = 0.85f;
@@ -394,18 +348,6 @@ namespace DogThings
                         //Debug.Log($"pet ball's bounciness set to {material.bounciness}");
                     }
                 }
-
-                //一些调试用
-                //if("dogthings.poopbag" == __instance.id)
-                //{
-                //    var c = __instance.GetComponent<Container>();
-                //    Debug.Log("屎袋信息：" + string.Join(", ", c.tagRestriction));
-                //}
-                //Debug.Log(__instance.id + " 道具标签:" + string.Join(", ", __instance.Stats.GetTags()));
-                //if ("droppings" == __instance.id)
-                //{
-                //    Debug.Log(Item.GlobalItems["droppings"].tags);
-                //}
             }
         }
     }
@@ -451,7 +393,4 @@ namespace DogThings
             return res;
         }
     }
-
-
-
 }
