@@ -197,6 +197,36 @@ namespace DogThings
                 c.tagRestriction = new[] { "droppings" };
             });
 
+            //Pet brush
+            IteminfoRegister("petbrush", new ItemInfo
+            {
+                category = "utility",
+                slotRotation = -45f,
+                usable = true,
+                usableOnLimb = false,
+                decayMinutes = 240f,
+                //decayInfo = 6,
+                destroyAtZeroCondition = true,
+                combineable = false,
+                weight = 0.4f,
+                value = 10,
+                fullName = GetText("dogthings.petbrush", "Pet brush", "宠物毛刷"),
+                description = GetText("dogthings.petbrush.dsc", "Removes dirt and loose fur. A clean dog is a happy dog.", "清除污垢和浮毛，干干净净的狗狗最开心。"),
+                rec = new Recognition(3),
+                useAction = delegate (Body body, Item item)
+                {
+                    if (body.stamina > 10f && body.dirtyness >40f)
+                    {
+                        body.stamina -= 5f;
+                        body.energy -= 1f;
+                        body.dirtyness -= 10f;
+                        body.happiness += 1f;
+                        item.condition -= 0.05f;
+                        Sound.Play("combine", body.transform.position, false, true, null, 1f, 1f, false, false);//need specific sound effect
+                    }
+                },
+            });
+
             //File.AppendAllText(Application.persistentDataPath + "/LOG.txt", "Dogthings awake ended. \n");
         }
 
@@ -230,6 +260,10 @@ namespace DogThings
                 pivot = new Vector2(0.5f, 0f);  // 伊丽莎白圈：底部正中
             else if ("dogcarrier" == id)
                 pivot = new Vector2(0.8f, 0.5f);  // 狗狗背包
+            else if ("poopbag" == id)
+                pivot = new Vector2(0.5f, 0.75f);  // 捡屎袋
+            else if ("petbrush" == id)
+                pivot = new Vector2(0.25f, 0.75f);  // 宠物毛刷
             return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), pivot, ppu);
         }
 

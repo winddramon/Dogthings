@@ -13,8 +13,8 @@
 
 ### 前置依赖
 
-- **BepInEx** (5.x)
-- **RshLib** (3.0.0)
+- **BepInEx** (5.4.x)
+- **RshLib** (3.0.x)
 
 ### 安装方法
 
@@ -32,6 +32,7 @@
 | `dogthings.dogchew` | 狗咬胶 | 可食用多次，增加微量饱食和心情 |
 | `dogthings.dogcarrier` | 狗狗背包 | 一个大背包，能装入重达50u的东西 |
 | `dogthings.poopbag` | 捡屎袋 | 一个只能用来装屎的袋子，但是能装很多 |
+| `dogthings.petbrush` | 宠物毛刷 | 刷毛可以降低脏污度（下限40点）并增加微量心情 |
 
 ### 编译指南
 
@@ -43,6 +44,11 @@
   - `UnityEngine*.dll`
 
 ### 版本历史
+
+#### v1.3.1
+- 重写了部分道具逻辑
+- 新增宠物毛刷
+- 微调了捡屎袋的图像位置
 
 #### v1.2.2
 - 修正了容器内容在读取游戏时丢失的问题
@@ -91,8 +97,8 @@ Adds a series of dog-themed items to *Casualties: Unknown* (Demo V7.0), allowing
 
 ### Requirements
 
-- **BepInEx** (5.x)
-- **RshLib** (3.0.0)
+- **BepInEx** (5.4.x)
+- **RshLib** (3.0.x)
 
 ### Installation
 
@@ -110,6 +116,7 @@ Adds a series of dog-themed items to *Casualties: Unknown* (Demo V7.0), allowing
 | `dogthings.dogchew` | Dog Chew | Edible multiple times, restores small amounts of hunger and happiness |
 | `dogthings.dogcarrier` | Dog Carrier | A backpack big enough to carry 50u |
 | `dogthings.poopbag` | Poop Bag | A bag that can only hold poop. But a lot of it. |
+| `dogthings.petbrush` | Pet Brush | Brushing reduces dirtiness (minimum 40) and grants a little happiness |
 
 ### Build Guide
 
@@ -122,6 +129,11 @@ Adds a series of dog-themed items to *Casualties: Unknown* (Demo V7.0), allowing
 
 ### Changelog
 
+#### v1.3.1
+- Refactored some item logic
+- Added Pet Brush
+- Tweaked Poop Bag icon position
+
 #### v1.2.2
 - Fixed an issue where container contents would be lost when loading a saved game
 
@@ -130,7 +142,7 @@ Adds a series of dog-themed items to *Casualties: Unknown* (Demo V7.0), allowing
 
 #### v1.2.0
 - Added poop bag
-- Now surported DEMO V7.0
+- Now supported DEMO V7.0
 
 #### v1.1.0
 - Added dog carrier
